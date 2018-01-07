@@ -1,0 +1,13 @@
+coverage
+node_modules
+src
+tests
+.babelrc
+.eslintrc.js
+.gitignore
+.prettierrc.json
+.travis.yml
+jest.config.js
+package-lock.json
+rollup.config.js
+yarn.lock

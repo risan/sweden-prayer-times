@@ -1,0 +1,13 @@
+{
+  "env": {
+    "build": {
+      "presets": [
+        ["env", { "modules": false }]
+      ],
+      "plugins": ["external-helpers"]
+    },
+    "jest": {
+      "presets": ["env"]
+    }
+  }
+}

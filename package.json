@@ -1,0 +1,62 @@
+{
+  "name": "sweden-prayer-times",
+  "description": "A package to find prayer a times in Sweden",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
+  "homepage": "https://github.com/risan/sweden-prayer-times#readme",
+  "author": {
+    "name": "Risan Bagja Pradana",
+    "email": "risanbagja@gmail.com",
+    "url": "https://risan.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/risan/sweden-prayer-times.git"
+  },
+  "bugs": {
+    "url": "https://github.com/risan/sweden-prayer-times/issues"
+  },
+  "keywords": [
+    "sleep",
+    "promise",
+    "async"
+  ],
+  "main": "dist/sweden-prayer-times.cjs.js",
+  "module": "dist/sweden-prayer-times.esm.js",
+  "browser": "dist/sweden-prayer-times.umd.js",
+  "engines": {
+    "node": ">= 6"
+  },
+  "scripts": {
+    "build": "NODE_ENV=build rollup -c",
+    "dev": "NODE_ENV=build rollup -c -w",
+    "lint": "eslint src",
+    "lint-fix": "eslint src --fix",
+    "prepublishOnly": "npm run test && npm run build",
+    "prettier": "prettier --write '{src,tests}/**/*.js'",
+    "test": "NODE_ENV=jest jest"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "jest": "^21.2.1",
+    "prettier": "^1.9.2",
+    "rollup": "^0.52.2",
+    "rollup-plugin-babel": "^3.0.2",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-eslint": "^4.0.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-uglify": "^2.0.1"
+  },
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "request": "^2.83.0"
+  }
+}
