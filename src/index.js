@@ -1,4 +1,4 @@
-import request from 'request';
+import axios from 'axios';
 import {
   format as formatDate,
   parse as parseDate,
@@ -19,24 +19,16 @@ export default class SwedenPrayerTimes {
     const parsedDate = SwedenPrayerTimes.castToDate(date);
 
     return new Promise((resolve, reject) => {
-      request(
-        this.getRequestConfig({ city, date: parsedDate }),
-        (err, httpResponse, body) => {
-          if (err) {
-            return reject(err);
-          }
-
-          if (httpResponse.statusCode !== 200) {
-            return reject(SwedenPrayerTimes.castResponseToError(httpResponse));
-          }
-
-          return resolve({
+      axios
+        .request(this.getRequestConfig({ city, date: parsedDate }))
+        .then(res =>
+          resolve({
             city,
             date: formatDate(parsedDate, 'YYYY-MM-DD'),
-            schedule: SwedenPrayerTimes.parseBody(body)
-          });
-        }
-      );
+            schedule: SwedenPrayerTimes.parseResponse(res.data)
+          })
+        )
+        .catch(err => reject(SwedenPrayerTimes.castToError(err)));
     });
   }
 
@@ -51,31 +43,55 @@ export default class SwedenPrayerTimes {
   }
 
   getRequestConfig({ city, date }) {
+    const data = SwedenPrayerTimes.getFormData({ city, date });
+
     return {
       url: this.uri,
       method: 'POST',
-      form: {
-        ifis_bonetider_widget_city: `${city}, SE`,
-        ifis_bonetider_widget_date: formatDate(date, 'dddd D MMMM YYYY')
-      }
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'Content-Length': data.length
+      },
+      responseType: 'text',
+      data
     };
   }
 
-  static castResponseToError(httpResponse) {
-    return new Error(
-      `[${httpResponse.statusCode}] Failed requesting data from server.`
-    );
+  static getFormData({ city, date }) {
+    const cityEncoded = `${city}%2C+SE`;
+    const dateEncoded = formatDate(date, 'dddd D MMMM YYYY').replace(/ /g, '+');
+
+    return `ifis_bonetider_widget_city=${cityEncoded}&ifis_bonetider_widget_date=${dateEncoded}`;
   }
 
-  static parseBody(body) {
+  static parseResponse(response) {
     const timePattern = /\d{2}:\d{2}/g;
     const timeNames = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
 
-    return body.match(timePattern).reduce((schedule, time, idx) => {
+    return response.match(timePattern).reduce((schedule, time, idx) => {
       const newSchedule = Object.assign({}, schedule);
       newSchedule[timeNames[idx]] = time;
 
       return newSchedule;
     }, {});
+  }
+
+  static castToError(error) {
+    if (error.response) {
+      const { status, statusText } = error.response;
+
+      return new Error(
+        `Failed requesting data from server: [${status}] ${statusText ||
+          'Unknown error'}`
+      );
+    }
+
+    if (error.request) {
+      return new Error(
+        'Failed sending request to server, no response was received.'
+      );
+    }
+
+    return error;
   }
 }
