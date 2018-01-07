@@ -76,9 +76,9 @@ By default the `get` method will retrieve the prayer times for today. However yo
 
 ```js
 // Both will get prayer times for August 1st 2018
-prayerTimes.get(new Date(2018, 7, 1));
+prayerTimes.get({ date: new Date(2018, 7, 1) });
 
-prayerTimes.get('2018-08-01');
+prayerTimes.get({ date: '2018-08-01' });
 ```
 
 ## License
