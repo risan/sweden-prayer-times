@@ -13,9 +13,9 @@ const umdConfig = ({ minify = false } = {}) => {
       format: 'umd'
     },
     name: 'SwedenPrayerTimes',
-    external: ['request', 'date-fns'],
+    external: ['axios', 'date-fns'],
     globals: {
-      request: 'request',
+      axios: 'axios',
       'date-fns': 'date-fns'
     },
     plugins: [
@@ -52,7 +52,7 @@ export default [
         format: 'es'
       }
     ],
-    external: ['request', 'date-fns'],
+    external: ['axios', 'date-fns'],
     plugins: [
       eslint({
         include: ['src/**'],
