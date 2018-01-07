@@ -16,9 +16,11 @@ export default class SwedenPrayerTimes {
   }
 
   get({ city = this.defaultCity, date = new Date() } = {}) {
+    const parsedDate = SwedenPrayerTimes.castToDate(date);
+
     return new Promise((resolve, reject) => {
       request(
-        this.getRequestConfig({ city, date }),
+        this.getRequestConfig({ city, date: parsedDate }),
         (err, httpResponse, body) => {
           if (err) {
             return reject(err);
@@ -30,12 +32,22 @@ export default class SwedenPrayerTimes {
 
           return resolve({
             city,
-            date: formatDate(date, 'YYYY-MM-DD'),
+            date: formatDate(parsedDate, 'YYYY-MM-DD'),
             schedule: SwedenPrayerTimes.parseBody(body)
           });
         }
       );
     });
+  }
+
+  static castToDate(date) {
+    const parsedDate = parseDate(date);
+
+    if (!isValidDate(parsedDate)) {
+      throw new Error(`The given date is not valid: ${date}`);
+    }
+
+    return parsedDate;
   }
 
   getRequestConfig({ city, date }) {
@@ -44,28 +56,14 @@ export default class SwedenPrayerTimes {
       method: 'POST',
       form: {
         ifis_bonetider_widget_city: `${city}, SE`,
-        ifis_bonetider_widget_date: SwedenPrayerTimes.formatDateForFormData(
-          date
-        )
+        ifis_bonetider_widget_date: formatDate(date, 'dddd D MMMM YYYY')
       }
     };
   }
 
-  static formatDateForFormData(date) {
-    const parsedDate = parseDate(date);
-
-    if (!isValidDate(parsedDate)) {
-      throw new Error(`The given date is not valid: ${date}`);
-    }
-
-    return formatDate(parsedDate, 'dddd D MMMM YYYY');
-  }
-
   static castResponseToError(httpResponse) {
     return new Error(
-      `Failed requesting data from server: [${httpResponse.statusCode}] ${
-        httpResponse.statusMessage
-      }`
+      `[${httpResponse.statusCode}] Failed requesting data from server.`
     );
   }
 
