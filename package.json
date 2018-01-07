@@ -1,7 +1,7 @@
 {
   "name": "sweden-prayer-times",
   "description": "A package to find prayer times in Sweden",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "homepage": "https://github.com/risan/sweden-prayer-times#readme",
   "author": {
