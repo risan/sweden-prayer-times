@@ -17,9 +17,11 @@
     "url": "https://github.com/risan/sweden-prayer-times/issues"
   },
   "keywords": [
-    "sleep",
-    "promise",
-    "async"
+    "prayer",
+    "times",
+    "salah",
+    "islam",
+    "sweden"
   ],
   "main": "dist/sweden-prayer-times.cjs.js",
   "module": "dist/sweden-prayer-times.esm.js",
