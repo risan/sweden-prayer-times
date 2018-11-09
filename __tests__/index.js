@@ -1,4 +1,4 @@
-/* global test:false, expect:false */
+/* global jest:false, test:false, expect:false */
 import axios from "axios";
 import getPrayerTimes from "../src";
 
@@ -22,12 +22,12 @@ test("it can get prayer times", async () => {
 
   expect(result.city).toBe("Stockholm");
   expect(result.date).toMatch(/\d{4}-\d{2}-\d{2}/);
-  expect(result.schedule.fajr).toBe('01:00');
-  expect(result.schedule.sunrise).toBe('02:00');
-  expect(result.schedule.dhuhr).toBe('03:00');
-  expect(result.schedule.asr).toBe('04:00');
-  expect(result.schedule.maghrib).toBe('05:00');
-  expect(result.schedule.isha).toBe('06:00');
+  expect(result.schedule.fajr).toBe("01:00");
+  expect(result.schedule.sunrise).toBe("02:00");
+  expect(result.schedule.dhuhr).toBe("03:00");
+  expect(result.schedule.asr).toBe("04:00");
+  expect(result.schedule.maghrib).toBe("05:00");
+  expect(result.schedule.isha).toBe("06:00");
 });
 
 test("it can get prayer times for the specified city", async () => {
