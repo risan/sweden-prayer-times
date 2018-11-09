@@ -1,13 +1,17 @@
 {
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "modules": false
+      }
+    ]
+  ],
   "env": {
-    "build": {
+    "test": {
       "presets": [
-        ["env", { "modules": false }]
-      ],
-      "plugins": ["external-helpers"]
-    },
-    "jest": {
-      "presets": ["env"]
+        ["@babel/env"]
+      ]
     }
   }
 }

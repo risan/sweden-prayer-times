@@ -1,65 +1,71 @@
-import pkg from './package.json';
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import eslint from 'rollup-plugin-eslint';
-import uglify from 'rollup-plugin-uglify';
+import babel from "rollup-plugin-babel";
+import commonjs from "rollup-plugin-commonjs";
+import resolve from "rollup-plugin-node-resolve";
+import { terser } from "rollup-plugin-terser";
 
-const umdConfig = ({ minify = false } = {}) => {
+import pkg from "./package.json";
+
+const cjsOrEs = ({ file, format, babelConfig = {} }) => ({
+  input: "src/index.js",
+  output: {
+    file,
+    format
+  },
+  plugins: [
+    babel({
+      ...babelConfig,
+      exclude: "node_modules/**"
+    })
+  ],
+  external: [
+    "axios",
+    "date-fns/format",
+    "date-fns/is_valid",
+    "date-fns/parse",
+    "qs"
+  ]
+});
+
+const umd = ({ minify = false } = {}) => {
   const config = {
-    input: 'src/index.js',
+    input: "src/index.js",
     output: {
-      file: minify ? `dist/${pkg.name}.umd.min.js` : `dist/${pkg.name}.umd.js`,
-      format: 'umd'
+      name: "swedenPrayerTimes",
+      file: minify ? pkg.browser.replace(/\.js$/, ".min.js") : pkg.browser,
+      format: "umd",
+      globals: {
+        axios: "axios"
+      }
     },
-    name: 'SwedenPrayerTimes',
-    external: ['axios', 'date-fns'],
-    globals: {
-      axios: 'axios',
-      'date-fns': 'date-fns'
-    },
-    plugins: [
-      eslint({
-        include: ['src/**'],
-        throwOnError: true,
-        throwOnWarning: true
-      }),
-      resolve(),
-      commonjs(),
-      babel({ exclude: 'node_modules/**' })
-    ]
+    plugins: [resolve(), commonjs(), babel({ exclude: "node_modules/**" })],
+    external: ["axios"]
   };
 
   if (minify) {
-    config.plugins.push(uglify());
+    config.plugins.push(terser());
   }
 
   return config;
-}
+};
 
 export default [
-  umdConfig(),
-  umdConfig({ minify: true }),
-  {
-    input: 'src/index.js',
-    output: [
-      {
-        file: pkg.main,
-        format: 'cjs'
-      },
-      {
-        file: pkg.module,
-        format: 'es'
-      }
-    ],
-    external: ['axios', 'date-fns'],
-    plugins: [
-      eslint({
-        include: ['src/**'],
-        throwOnError: true,
-        throwOnWarning: true
-      }),
-      babel({ exclude: 'node_modules/**' })
-    ]
-  }
+  umd(),
+  umd({ minify: true }),
+  cjsOrEs({ file: pkg.module, format: "es" }),
+  cjsOrEs({
+    file: pkg.main,
+    format: "cjs",
+    babelConfig: {
+      babelrc: false,
+      presets: [
+        [
+          "@babel/env",
+          {
+            modules: false,
+            targets: "node 8"
+          }
+        ]
+      ]
+    }
+  })
 ];
