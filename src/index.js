@@ -1,8 +1,8 @@
-import axios from "axios";
-import formatDate from "date-fns/format";
-import isValidDate from "date-fns/is_valid";
-import parseDate from "date-fns/parse";
-import qs from "qs";
+const axios = require("axios");
+const formatDate = require("date-fns/format");
+const isValidDate = require("date-fns/is_valid");
+const parseDate = require("date-fns/parse");
+const qs = require("qs");
 
 /**
  * Get the prayer times.
@@ -53,4 +53,4 @@ const getPrayerTimes = async (city, date = new Date()) => {
   };
 };
 
-export default getPrayerTimes;
+module.exports = getPrayerTimes;

@@ -1,6 +1,6 @@
 /* global jest:false, test:false, expect:false */
-import axios from "axios";
-import getPrayerTimes from "../src";
+const axios = require("axios");
+const getPrayerTimes = require("../src");
 
 jest.mock("axios");
 
@@ -60,7 +60,7 @@ test("it throws an error if date is invalid", async () => {
   }
 });
 
-test("it throws an error if resonse is empty", async () => {
+test("it throws an error if response is empty", async () => {
   axios.post.mockResolvedValue({ data: "" });
 
   try {

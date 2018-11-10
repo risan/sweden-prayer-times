@@ -22,18 +22,15 @@
     "sweden",
     "salah"
   ],
-  "main": "dist/sweden-prayer-times.cjs.js",
-  "module": "dist/sweden-prayer-times.esm.js",
-  "browser": "dist/sweden-prayer-times.umd.js",
+  "main": "src/index.js",
   "engines": {
     "node": ">=8.0.0"
   },
   "scripts": {
-    "build": "rollup -c",
     "lint": "eslint ./",
     "lint-fix": "eslint ./ --fix",
     "prepublishOnly": "npm run lint && npm run test",
-    "test": "NODE_ENV=test jest"
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -41,21 +38,12 @@
     "qs": "^6.5.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.5",
-    "@babel/preset-env": "^7.1.5",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^3.0.0",
     "jest": "^23.6.0",
-    "prettier": "^1.15.1",
-    "rollup": "^0.67.0",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^3.4.0",
-    "rollup-plugin-terser": "^3.0.0"
+    "prettier": "^1.15.1"
   }
 }
