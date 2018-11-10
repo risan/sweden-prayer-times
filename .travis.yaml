@@ -5,9 +5,10 @@ env:
 matrix:
   fast_finish: true
   include:
-    - node_js: '6'
-    - node_js: '8'
+    - node_js: 8
+    - node_js: 10
       env: COLLECT_COVERAGE=true
+    - node_js: 11
 before_script:
   - if [[ "$COLLECT_COVERAGE" = "true" ]]; then curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; fi
   - if [[ "$COLLECT_COVERAGE" = "true" ]]; then chmod +x ./cc-test-reporter; fi
@@ -15,8 +16,9 @@ before_script:
 after_script:
   - if [[ "$COLLECT_COVERAGE" = "true" ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
 cache:
+  yarn: true
   directories:
-    - "node_modules"
+    - node_modules
 notifications:
   email:
     on_success: never
