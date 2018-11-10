@@ -1,2 +1,6 @@
 __tests__
 coverage
+.eslintignore
+.eslintrc.js
+jest.config.js
+yarn.lock
