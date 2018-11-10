@@ -17,10 +17,10 @@ Get prayer times in Sweden based on the data from [Islamiska Förbundet](http://
 ## Installation
 
 ```bash
-$ npm install page-scraper
+$ npm install sweden-prayer-times
 
 # Or if you use Yarn
-$ yarn add page-scraper
+$ yarn add sweden-prayer-times
 ```
 
 ## Quick Start
