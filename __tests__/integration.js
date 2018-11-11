@@ -1,8 +1,8 @@
 /* global jest:false, test:false, expect:false */
-const axios = require("axios");
 const getPrayerTimes = require("../src");
+const sendRequest = require("../src/send-request");
 
-jest.mock("axios");
+jest.mock("../src/send-request");
 
 const SUCCESS_RESPONSE = `
   <ul>
@@ -16,7 +16,7 @@ const SUCCESS_RESPONSE = `
 `;
 
 test("it can get prayer times", async () => {
-  axios.post.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
 
   const result = await getPrayerTimes("Stockholm");
 
@@ -31,23 +31,25 @@ test("it can get prayer times", async () => {
 });
 
 test("it can get prayer times for the specified city", async () => {
-  axios.post.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
 
   const result = await getPrayerTimes("Uppsala");
 
   expect(result.city).toBe("Uppsala");
-  expect(axios.post).toHaveBeenCalledTimes(1);
-  expect(axios.post.mock.calls[0][1]).toMatch(/Uppsala/m);
+  expect(sendRequest).toHaveBeenCalledTimes(1);
+  expect(sendRequest.mock.calls[0][0]).toMatch(/Uppsala/m);
 });
 
 test("it can get prayer times at the specified date", async () => {
-  axios.post.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
 
-  const result = await getPrayerTimes("Stockholm", "1945-08-17");
+  const date = new Date("2018-08-17");
 
-  expect(result.date).toBe("1945-08-17");
-  expect(axios.post).toHaveBeenCalledTimes(1);
-  expect(axios.post.mock.calls[0][1]).toMatch(/1945-08-17/m);
+  const result = await getPrayerTimes("Stockholm", date);
+
+  expect(result.date).toBe("2018-08-17");
+  expect(sendRequest).toHaveBeenCalledTimes(1);
+  expect(sendRequest.mock.calls[0][1]).toEqual(date);
 });
 
 test("it throws an error if date is invalid", async () => {
@@ -61,7 +63,7 @@ test("it throws an error if date is invalid", async () => {
 });
 
 test("it throws an error if response is empty", async () => {
-  axios.post.mockResolvedValue({ data: "" });
+  sendRequest.mockResolvedValue({ data: "" });
 
   try {
     await getPrayerTimes("Stockholm");
