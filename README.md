@@ -115,6 +115,10 @@ It returns a `Promise` which when resolved contains an object with the following
 }
 ```
 
+## Related
+
+* [sweden-prayer-times-cli](https://github.com/risan/sweden-prayer-times-cli): The CLI tool for this module.
+
 ## License
 
 MIT © [Risan Bagja Pradana](https://bagja.net)
