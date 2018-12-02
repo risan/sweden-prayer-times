@@ -1,0 +1,13 @@
+version: "2"
+exclude_patterns:
+  - "__tests__/"
+  - ".codeclimate.yml"
+  - ".eslintignore"
+  - ".eslintrc.js"
+  - ".gitignore"
+  - ".npmignore"
+  - ".travis.yml"
+  - "jest.config.js"
+  - "LICENSE"
+  - "package.json"
+  - "README.md"

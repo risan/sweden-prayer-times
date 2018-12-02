@@ -14,7 +14,7 @@ Get prayer times in Sweden based on the data from [Islamiska Förbundet](http://
 
 * [Node](https://nodejs.org/) version `>= 8.0.0`
 
-## Installation
+## Install
 
 ```bash
 $ npm install sweden-prayer-times
