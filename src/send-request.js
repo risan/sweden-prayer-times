@@ -1,6 +1,5 @@
-const axios = require("axios");
+const request = require("send-request");
 const formatDate = require("date-fns/format");
-const qs = require("qs");
 
 const capitalizeFirstLetter = require("./capitalize-first-letter");
 
@@ -9,25 +8,21 @@ const capitalizeFirstLetter = require("./capitalize-first-letter");
  *
  * @param {String} city
  * @param {Date} date
- * @return {Object}
+ * @return {String}
  */
 const sendRequest = async (city, date) => {
   const url =
     "https://www.islamiskaforbundet.se/wp-content/plugins/bonetider/Bonetider_Widget.php";
 
-  const params = {
-    ifis_bonetider_widget_city: `${capitalizeFirstLetter(city)}, SE`,
-    ifis_bonetider_widget_date: formatDate(date, "YYYY-MM-DD")
-  };
-
-  const response = await axios.post(url, qs.stringify(params), {
-    headers: {
-      "content-type": "application/x-www-form-urlencoded"
-    },
-    responseType: "text"
+  const { body } = await request(url, {
+    method: "POST",
+    body: {
+      ifis_bonetider_widget_city: `${capitalizeFirstLetter(city)}, SE`,
+      ifis_bonetider_widget_date: formatDate(date, "YYYY-MM-DD")
+    }
   });
 
-  return response;
+  return body;
 };
 
 module.exports = sendRequest;

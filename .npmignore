@@ -1,6 +1,5 @@
 __tests__
 coverage
-.codeclimate.yml
 .eslintignore
 .eslintrc.js
 .travis.yml

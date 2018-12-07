@@ -18,7 +18,7 @@ const getPrayerTimes = async (city, date = new Date()) => {
     throw new Error("The given date is invalid.");
   }
 
-  const { data } = await sendRequest(city, parsedDate);
+  const data = await sendRequest(city, parsedDate);
 
   const times = data.match(/\d{2}:\d{2}/gm);
 

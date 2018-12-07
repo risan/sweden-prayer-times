@@ -16,7 +16,7 @@ const SUCCESS_RESPONSE = `
 `;
 
 test("it can get prayer times", async () => {
-  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue(SUCCESS_RESPONSE);
 
   const result = await getPrayerTimes("Stockholm");
 
@@ -31,7 +31,7 @@ test("it can get prayer times", async () => {
 });
 
 test("it can get prayer times for the specified city", async () => {
-  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue(SUCCESS_RESPONSE);
 
   const result = await getPrayerTimes("Uppsala");
 
@@ -41,7 +41,7 @@ test("it can get prayer times for the specified city", async () => {
 });
 
 test("it can get prayer times at the specified date", async () => {
-  sendRequest.mockResolvedValue({ data: SUCCESS_RESPONSE });
+  sendRequest.mockResolvedValue(SUCCESS_RESPONSE);
 
   const date = new Date("2018-08-17");
 
@@ -63,7 +63,7 @@ test("it throws an error if date is invalid", async () => {
 });
 
 test("it throws an error if response is empty", async () => {
-  sendRequest.mockResolvedValue({ data: "" });
+  sendRequest.mockResolvedValue("");
 
   try {
     await getPrayerTimes("Stockholm");

@@ -1,29 +1,19 @@
 # Sweden Prayer Times
 
-[![Build Status](https://flat.badgen.net/travis/risan/sweden-prayer-times)](https://travis-ci.org/risan/sweden-prayer-times)
-[![Test Coverage](https://flat.badgen.net/codeclimate/coverage/risan/sweden-prayer-times)](https://codeclimate.com/github/risan/sweden-prayer-times)
-[![Maintainability](https://flat.badgen.net/codeclimate/maintainability/risan/sweden-prayer-times)](https://codeclimate.com/github/risan/sweden-prayer-times)
-[![Latest Stable Version](https://flat.badgen.net/npm/v/sweden-prayer-times)](https://www.npmjs.com/package/sweden-prayer-times)
-[![Node Version](https://flat.badgen.net/npm/node/sweden-prayer-times)](https://www.npmjs.com/package/sweden-prayer-times)
-[![Code Style: Prettier](https://flat.badgen.net/badge/code%20style/prettier/ff69b4)](https://github.com/prettier/prettier)
-[![License](https://flat.badgen.net/npm/license/sweden-prayer-times)](https://github.com/risan/sweden-prayer-times/blob/master/LICENSE)
+[![Build Status](https://badgen.net/travis/risan/sweden-prayer-times)](https://travis-ci.org/risan/sweden-prayer-times)
+[![Test Covarage](https://badgen.net/codecov/c/github/risan/sweden-prayer-times)](https://codecov.io/gh/risan/sweden-prayer-times)
+[![Greenkeeper](https://badges.greenkeeper.io/risan/sweden-prayer-times.svg)](https://greenkeeper.io)
+[![Latest Version](https://badgen.net/npm/v/sweden-prayer-times)](https://www.npmjs.com/package/sweden-prayer-times)
 
 Get prayer times in Sweden based on the data from [Islamiska Förbundet](http://www.islamiskaforbundet.se)'s website.
 
-## Requirement
-
-* [Node](https://nodejs.org/) version `>= 8.0.0`
-
-## Install
+## Installation
 
 ```bash
 $ npm install sweden-prayer-times
-
-# Or if you use Yarn
-$ yarn add sweden-prayer-times
 ```
 
-## Quick Start
+## Usage
 
 Get prayer times in Stockholm:
 
@@ -54,7 +44,7 @@ The example output:
 }
 ```
 
-## Recipe
+## Recipes
 
 ### Get Prayer Times for a Specified Date
 
@@ -85,18 +75,16 @@ const swedenPrayerTimes = require("sweden-prayer-times");
 
 ## API
 
-### `swedenPrayerTimes`
-
 ```js
-swedenPrayerTime(city, [date])
+swedenPrayerTimes(city, [date])
 ```
 
-#### Parameters
+### Parameters
 
 * `city` (`String`): The city name in Sweden.
 * `date` (optional `Date|String|Number`): The date to retrieve, default to today's date. It will be parsed by [`date-fns/parse`](https://date-fns.org/docs/parse).
 
-#### Return
+### Return
 
 It returns a `Promise` which when resolved contains an object with the following structure:
 
@@ -121,7 +109,7 @@ It returns a `Promise` which when resolved contains an object with the following
 
 ## License
 
-MIT © [Risan Bagja Pradana](https://bagja.net)
+[MIT](https://github.com/risan/sweden-prayer-times/blob/master/LICENSE) © [Risan Bagja Pradana](https://bagja.net)
 
 ## Legal
 

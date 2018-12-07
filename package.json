@@ -1,10 +1,11 @@
 {
   "name": "sweden-prayer-times",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Get prayer times in Sweden.",
   "keywords": [
     "islam",
     "prayer",
+    "prayer-times",
     "sweden",
     "salah"
   ],
@@ -30,9 +31,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "date-fns": "^1.29.0",
-    "qs": "^6.5.2"
+    "qs": "^6.5.2",
+    "send-request": "1.x"
   },
   "devDependencies": {
     "eslint": "^5.9.0",
