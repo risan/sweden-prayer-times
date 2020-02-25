@@ -2,7 +2,6 @@
 
 [![Build Status](https://badgen.net/travis/risan/sweden-prayer-times)](https://travis-ci.org/risan/sweden-prayer-times)
 [![Test Covarage](https://badgen.net/codecov/c/github/risan/sweden-prayer-times)](https://codecov.io/gh/risan/sweden-prayer-times)
-[![Greenkeeper](https://badges.greenkeeper.io/risan/sweden-prayer-times.svg)](https://greenkeeper.io)
 [![Latest Version](https://badgen.net/npm/v/sweden-prayer-times)](https://www.npmjs.com/package/sweden-prayer-times)
 
 Get prayer times in Sweden based on the data from [Islamiska Förbundet](http://www.islamiskaforbundet.se)'s website.
